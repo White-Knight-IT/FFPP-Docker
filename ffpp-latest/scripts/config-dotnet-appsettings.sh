@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$SHOW_DEV_ENDPOINTS" = "'false'"]
+if [ "$SHOW_DEV_ENDPOINTS" = "'false'" ]
 then
   export SHOW_DEV_ENDPOINTS=false
 else
