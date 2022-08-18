@@ -69,4 +69,6 @@ RUN chown www-data:www-data * -R
 
 WORKDIR /root/ffpp/built
 
+RUN chmod 555 /root/scripts/start.sh
+
 CMD /root/scripts/start.sh
