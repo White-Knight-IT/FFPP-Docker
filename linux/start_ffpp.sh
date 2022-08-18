@@ -133,7 +133,7 @@ sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw
 # Create our docker compose file from variables
 envsubst '${ENV_TIMEZONE} ${ENV_FFPP_DOMAIN} ${ENV_NGINX_HTTP_PORT} ${ENV_NGINX_HTTPS_PORT} ${ENV_MARIADB_USER} ${ENV_MARIADB_PASSWORD}' < ./templates/compose.template > ./compose.yml
 
-if ["$CONF_CHECK_DNS"]
+if $CONF_CHECK_DNS
 then
   # Ensure that the FFPP domain name is pointing to this servers IP address (necessary for LE cert)
   export ENV_MY_IP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
@@ -141,7 +141,7 @@ then
   echo "This server IP address: "$ENV_MY_IP
   echo "The IP found in dns lookup for domain: "$ENV_FFPP_DOMAIN" is: "$ENV_DOMAIN_FOUND_IP
 
-  if [[ "$ENV_MY_IP" == "$ENV_DOMAIN_FOUND_IP" ]]
+  if [ "$ENV_MY_IP" = "$ENV_DOMAIN_FOUND_IP" ]
   then
     echo "Great, FFPP domain is pointing to this server"
   else
@@ -150,7 +150,7 @@ then
   fi
 fi
 
-if ["$CONF_ENABLE_UFW"]
+if $CONF_ENABLE_UFW
 then
   # UFW allow our ports
   sudo ufw allow $ENV_HOST_SSH_PORT
@@ -160,9 +160,10 @@ then
   sudo ufw --force enable
 fi
 
-if ["$CONF_ALWAYS_FORCE_CONTAINER_REBUILD"]
+if $CONF_ALWAYS_FORCE_CONTAINER_REBUILD
 then
   # Run our docker containers - they will always build
+  echo "Rebuild the containers"
   sudo docker-compose up -d --build
 else
   # Run our docker containers - they only build if they are not already built
