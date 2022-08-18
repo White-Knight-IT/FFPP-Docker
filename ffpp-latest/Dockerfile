@@ -65,6 +65,8 @@ RUN . /root/scripts/config-nginx.sh
 
 RUN git clone https://github.com/White-Knight-IT/FFPP.git /root/ffpp/src
 
+RUN . /root/scripts/config-dotnet-appsettings.sh
+
 RUN dotnet build --configuration Release /root/ffpp/src/FFPP.sln
 
 RUN rm /root/ffpp/src/FFPP/appsettings.Development.json

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Kill nginx if it's running
+kill $(cat /var/run/nginx.pid)
+
 # Start nginx
 nginx
 

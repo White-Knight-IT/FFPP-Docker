@@ -45,7 +45,7 @@ export ENV_MARIADB_SERVER="localhost"
 # you can change it if you want
 export ENV_MARIADB_PORT=7704
 
-# Expose development API endpoints for testing, you likely don't want this
+# Expose development API endpoints for testing, you likely don't want this "'true'"/"'false'"
 export ENV_SHOW_DEV_ENDPOINTS="'false'"
 
 # Options are quad9, google, cloudflare
