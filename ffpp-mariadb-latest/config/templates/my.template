@@ -21,7 +21,7 @@
 #
 [client-server]
 # Port or socket location where to connect
-port = 7704
+port = ${MARIADB_PORT}
 socket = /run/mysqld/mysqld.sock
 
 # Import all .cnf files from configuration directory

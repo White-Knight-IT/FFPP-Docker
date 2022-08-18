@@ -6,9 +6,15 @@ ARG MARIADB_USER
 
 ARG MARIADB_PASSWORD
 
-COPY my.cnf /etc/alternatives/my.cnf
+ARG MARIADB_PORT
 
-COPY my.cnf /etc/mysql/mariadb.cnf
+COPY config /root/config
+
+COPY scripts /root/scripts
+
+WORKDIR /root/scripts
+
+RUN . /root/scripts/config-mariadb.sh
 
 ENV MARIADB_RANDOM_ROOT_PASSWORD yes
 

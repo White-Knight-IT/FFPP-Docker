@@ -9,6 +9,18 @@ ARG NGINX_HTTP_PORT
 
 ARG NGINX_HTTPS_PORT
 
+ARG MARIADB_USER
+
+ARG MARIADB_PASSWORD
+
+ARG MARIADB_SERVER
+
+ARG MARIADB_PORT
+
+ARG SHOW_DEV_ENDPOINTS
+
+ARG DNS_PROVIDER
+
 ENV PATH=${PATH}:/root/.dotnet/tools
 
 ENV DOTNET_GENERATE_ASPNET_CERTIFICATE=true
@@ -19,7 +31,7 @@ RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /et
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -yq
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install tzdata openssl ca-certificates wget git mariadb-client nginx certbot python3-certbot-nginx nano net-tools gettext-base
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install tzdata openssl ca-certificates wget git mariadb-client nginx certbot python3-certbot-nginx nano net-tools gettext-base dnsutils
 
 RUN dotnet tool install --global dotnet-ef
 
@@ -39,7 +51,7 @@ RUN mkdir /root/ffpp/src
 
 RUN mkdir /var/www/ffpp-webfront
 
-WORKDIR /root/ffpp/scripts
+WORKDIR /root/scripts
 
 COPY scripts /root/scripts
 
@@ -54,6 +66,8 @@ RUN . /root/scripts/config-nginx.sh
 RUN git clone https://github.com/White-Knight-IT/FFPP.git /root/ffpp/src
 
 RUN dotnet build --configuration Release /root/ffpp/src/FFPP.sln
+
+RUN rm /root/ffpp/src/FFPP/appsettings.Development.json
 
 RUN cp -R /root/ffpp/src/FFPP/bin/Release/net6.0/wwwroot/* /var/www/ffpp-webfront
 

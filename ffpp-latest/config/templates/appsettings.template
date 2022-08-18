@@ -1,0 +1,37 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ApiSettings": {
+    "CachePath": "/root/ffpp/cache",
+    "PersistentPath": "/root/ffpp/persistent",
+    "HttpsRedirect": true,
+    "HttpsOnly": true,
+    "ShowSwaggerUi": true,
+    "RunSwagger": true,
+    "ServeStaticFiles": false,
+    "ShowDevEndpoints": ${SHOW_DEV_ENDPOINTS},
+    "WebUiUrl": "https://${FFPP_DOMAIN}",
+    "DnsProvider": "${DNS_PROVIDER}",
+    "DbSettings": {
+      "MysqlUser": "${MARIADB_USER}",
+      "MysqlPassword": "${MARIADB_PASSWORD}",
+      "MysqlServer": "${MARIADB_SERVER}",
+      "MysqlServerPort": "${MARIADB_PORT}"
+    }
+  },
+  "Kestrel": {
+    "Endpoints": {
+      "Https": {
+        "Url": "https://localhost:7074"
+      },
+      "Http": {
+        "Url": "http://localhost:7073"
+      }
+    }
+  },
+  "AllowedHosts": "*"
+}

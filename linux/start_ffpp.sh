@@ -38,6 +38,19 @@ export ENV_MARIADB_USER="ffppapiservice"
 # Password for above DB user, you can change it if you want
 export ENV_MARIADB_PASSWORD="wellknownpassword"
 
+# Hostname or IP of mariaDB instance to use, probably you won't change this
+export ENV_MARIADB_SERVER="localhost"
+
+# Deliberately not the default 3306 in case your host already is running mariaDB/MySQL,
+# you can change it if you want
+export ENV_MARIADB_PORT=7704
+
+# Expose development API endpoints for testing, you likely don't want this
+export ENV_SHOW_DEV_ENDPOINTS=false
+
+# Options are quad9, google, cloudflare
+export ENV_DNS_PROVIDER="quad9"
+
 # The port that this host (server) is using for SSH, default is always 22/tcp for SSH, only change this
 # if you changed your SSH port else you will be locked out when Uncomplicated Firewall is enabled
 # ********** WARNING *********** IF YOU FAF THIS YOU WILL BE LOCKED OUT FROM SSH TO THE HOST (SERVER)
@@ -136,7 +149,7 @@ fi
 sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw
 
 # Create our docker compose file from variables
-envsubst '${ENV_TIMEZONE} ${ENV_FFPP_DOMAIN} ${ENV_NGINX_HTTP_PORT} ${ENV_NGINX_HTTPS_PORT} ${ENV_MARIADB_USER} ${ENV_MARIADB_PASSWORD}' < ./templates/compose.template > ./compose.yml
+envsubst '${ENV_TIMEZONE} ${ENV_FFPP_DOMAIN} ${ENV_NGINX_HTTP_PORT} ${ENV_NGINX_HTTPS_PORT} ${ENV_MARIADB_USER} ${ENV_MARIADB_PASSWORD} ${ENV_MARIADB_SERVER} ${ENV_MARIADB_PORT} ${ENV_SHOW_DEV_ENDPOINTS} ${ENV_DNS_PROVIDER}' < ./templates/compose.template > ./compose.yml
 
 if $CONF_CHECK_DNS
 then
