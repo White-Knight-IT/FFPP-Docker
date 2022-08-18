@@ -129,7 +129,7 @@ export ENV_HOST_SSH_PORT="22/tcp"
 
 if [ "$ENV_FFPP_DOMAIN" = "ffpp.yourdomainhere.com" ]
 then
-  echo "** YOU MUST EDIT THE VARIABLES IN THIS SCRIPT BEFORE RUNING IT (e.g. run "nano start_ffpp.sh") ** - Exiting......"
+  echo "** YOU MUST EDIT THE VARIABLES IN THIS SCRIPT BEFORE RUNING IT (e.g. run \"nano start_ffpp.sh\") ** - Exiting......"
   exit 1
 fi
 # Install needed and useful tools on the host
