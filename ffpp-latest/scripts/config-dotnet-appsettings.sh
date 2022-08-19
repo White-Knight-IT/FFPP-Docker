@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo $SHOW_DEV_ENDPOINTS
+echo $SHOW_DEV_ENDPOINTS
+echo $SHOW_DEV_ENDPOINTS
+echo $SHOW_DEV_ENDPOINTS
+echo $SHOW_DEV_ENDPOINTS
+
 if [ "$SHOW_DEV_ENDPOINTS" = "'false'" ]
 then
   export SHOW_DEV_ENDPOINTS=false
