@@ -145,8 +145,21 @@ then
   echo "** YOU MUST EDIT THE VARIABLES IN THIS SCRIPT BEFORE RUNING IT (e.g. run \"nano start_ffpp.sh\") ** - Exiting......"
   exit 1
 fi
+
+# Get Microsoft repository
+wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+
+# Register the Microsoft repository
+sudo dpkg -i packages-microsoft-prod.deb
+
+# Remove the repository package now it is registered
+sudo rm -rf packages-microsoft-prod.deb
+
+# Update repo cache and upgrade any tools that need upgrading
+sudo apt update && apt upgrade -yq
+
 # Install needed and useful tools on the host
-sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw
+sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw apt-transport-https software-properties-common powershell
 
 # Create our docker compose file from variables
 envsubst '${ENV_TIMEZONE} ${ENV_FFPP_DOMAIN} ${ENV_NGINX_HTTP_PORT} ${ENV_NGINX_HTTPS_PORT} ${ENV_MARIADB_USER} ${ENV_MARIADB_PASSWORD} ${ENV_MARIADB_SERVER} ${ENV_MARIADB_PORT} ${ENV_SHOW_DEV_ENDPOINTS} ${ENV_DNS_PROVIDER}' < ./templates/compose.template > ./compose.yml
