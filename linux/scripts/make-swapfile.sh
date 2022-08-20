@@ -6,7 +6,7 @@ sudo swapon --show
 echo " "
 echo "Do you see a swapfile in the above output? [y/N]: "
 read inputVar
-if [ $inputVar == "y" || $inputVar == "Y" ]
+if [ $inputVar = "y" ]||[ $inputVar = "Y" ]
 then
   echo "Cancelling swapfile creation"
   exit 0
