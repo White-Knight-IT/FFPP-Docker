@@ -4,8 +4,9 @@ echo "Checking if swapfile already exists: "
 echo " "
 sudo swapon --show
 echo " "
-read -p 'Do you see a swapfile in the above output? [y/N]' inputVar
-if ($inputVar == 'y' || $inputVar == 'Y')
+echo "Do you see a swapfile in the above output? [y/N]: "
+read inputVar
+if [ $inputVar == "y" || $inputVar == "Y" ]
 then
   echo "Cancelling swapfile creation"
   exit 0
