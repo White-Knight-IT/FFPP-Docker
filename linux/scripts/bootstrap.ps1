@@ -20,20 +20,22 @@ Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
 if ( ! ( Get-Module Az ) ) { # Check if the Az PowerShell module is loaded.
 
   if ( Get-Module -ListAvailable -Name Az ) { # The Az PowerShell module is not loaded and it is installed. This module # must be loaded for other operations performed by this script.
-    Write-Host -ForegroundColor Green
-    @"Loading the Az PowerShell module...
+    Write-Host -ForegroundColor Green @"
+    Loading the Az PowerShell module...
     "@
     Import-Module Az
   }
   else {
-  Write-Host -ForegroundColor Green @"Installing the Az PowerShell module...
+  Write-Host -ForegroundColor Green @"
+  Installing the Az PowerShell module...
   "@
     Install-Module Az -Force
   }
 }
 
 try {
-  Write-Host -ForegroundColor Green @"When prompted please open a browser window and sign in using the Global Administrator account on your tenant (Probably you made a Global Admin exclusively for use by FFPP? You should do so as you can exclude it from Conditional Access policies and such.)
+  Write-Host -ForegroundColor Green @"
+  When prompted please open a browser window and sign in using the Global Administrator account on your tenant (Probably you made a Global Admin exclusively for use by FFPP? You should do so as you can exclude it from Conditional Access policies and such.)
   "@
   Connect-AzAccount -UseDeviceAuthentication
 }
@@ -57,6 +59,7 @@ Type = "Scope"}
 }
 
 Write-Host -ForegroundColor Green @"
+
 Creating the Azure AD application and related resources...
 "@
 
@@ -70,15 +73,22 @@ $adminAgentsGroup = Get-AzADGroup -DisplayName "AdminAgents"
 
 Add-AzADGroupMember -TargetGroupObject $adminAgentsGroup -MemberObjectId $spn.id
 
-write-host " "
-write-host @"Waiting 20 seconds for app to propagate across Azure AD....
+write-host @"
+
+Waiting 20 seconds for app to propagate across Azure AD....
 "@
 start-sleep 20
-write-warning @"Please sign in at:
+write-warning @"
+
+Please sign in at:
 "@
-write-host -ForegroundColor Cyan @"https://login.microsoftonline.com/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fgraph.microsoft.com&client_id=$($app.appId)&redirect_uri=https%3A%2F%2Febay.com.au
+write-host -ForegroundColor Cyan @"
+
+https://login.microsoftonline.com/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fgraph.microsoft.com&client_id=$($app.appId)&redirect_uri=https%3A%2F%2Febay.com.au
 "@
-write-host -ForegroundColor Green @"Press any key after you have signed in.
+write-host -ForegroundColor Green @"
+
+Press any key after you have signed in.
 "@
 [void][system.console]::ReadKey($true)
 
@@ -101,7 +111,8 @@ catch {}
 
 try {
   $bootstrapCreds | ConvertTo-Json | Add-Content  -Path "../shared_persistent_volume/bootstrap.json"
-  write-host -ForegroundColor Green @"bootstrap.json successfully created.
+  write-host -ForegroundColor Green @"
+  bootstrap.json successfully created.
   "@
 }
 catch {
