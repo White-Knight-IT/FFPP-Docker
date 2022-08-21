@@ -79,6 +79,8 @@ Creating the Azure AD application and related resources...
 "@
 
 $app = New-AzADApplication -SigninAudience AzureADMultipleOrgs -DisplayName $DisplayName -RequiredResourceAccess $graphAppAccess -ReplyUrls @("https://localhost:7074","urn:ietf:wg:oauth:2.0:oob","https://login.microsoftonline.com/organizations/oauth2/nativeclient","https://localhost","http://localhost","http://localhost:8400")
+# 30 second sleep let the app propagate in Azure before creating password
+start-sleep 30
 $password = New-AzADAppCredential -ObjectId $app.id
 $spn = New-AzADServicePrincipal -ApplicationId $app.appId
 
@@ -86,12 +88,6 @@ $adminAgentsGroup = Get-AzADGroup -DisplayName "AdminAgents"
 
 Add-AzADGroupMember -TargetGroupObject $adminAgentsGroup -MemberObjectId $spn.id
 
-write-host -ForegroundColor Green @"
-
-Waiting 30 seconds for app to propagate across Azure AD...
-
-"@
-start-sleep 30
 write-warning "Please copy below cyan link into a browser window and sign in using your Global Administrator:"
 write-host -ForegroundColor Cyan @"
 
