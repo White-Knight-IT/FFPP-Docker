@@ -178,7 +178,7 @@ echo " "
 echo "Installing tools on host..."
 echo " "
 # Install needed and useful tools on the host
-sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw apt-transport-https software-properties-common powershell
+sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw ca-certificates apt-transport-https software-properties-common powershell curl gnupg2 lsb-release ubuntu-keyring 
 
 # Create our docker compose file from variables
 envsubst '${ENV_TIMEZONE} ${ENV_FFPP_DOMAIN} ${ENV_NGINX_HTTP_PORT} ${ENV_NGINX_HTTPS_PORT} ${ENV_MARIADB_USER} ${ENV_MARIADB_PASSWORD} ${ENV_MARIADB_SERVER} ${ENV_MARIADB_PORT} ${ENV_SHOW_DEV_ENDPOINTS} ${ENV_DNS_PROVIDER}' < ./templates/compose.template > ./compose.yml

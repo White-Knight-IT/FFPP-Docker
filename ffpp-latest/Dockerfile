@@ -31,7 +31,17 @@ RUN ln -snf /usr/share/zoneinfo/$TIMEZONE /etc/localtime && echo $TIMEZONE > /et
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -yq
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install tzdata openssl ca-certificates wget git mariadb-client nginx certbot python3-certbot-nginx nano net-tools gettext-base dnsutils
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install tzdata openssl ca-certificates wget git mariadb-client nano net-tools gettext-base dnsutils curl gnupg2 lsb-release ubuntu-keyring
+
+RUN DEBIAN_FRONTEND=noninteractive curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor | tee /usr/share/keyrings/nginx-archive-keyring.gpg >/dev/null
+
+RUN echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/ubuntu `lsb_release -cs` nginx" | tee /etc/apt/sources.list.d/nginx.list
+
+RUN echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | tee /etc/apt/preferences.d/99nginx
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install nginx certbot python3-certbot-nginx
 
 RUN dotnet tool install --global dotnet-ef
 
