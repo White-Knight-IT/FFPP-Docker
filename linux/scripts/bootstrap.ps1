@@ -20,7 +20,8 @@ Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
 if ( ! ( Get-Module Az ) ) { # Check if the Az PowerShell module is loaded.
 
   if ( Get-Module -ListAvailable -Name Az ) { # The Az PowerShell module is not loaded and it is installed. This module # must be loaded for other operations performed by this script.
-    Write-Host -ForegroundColor Green @"Loading the Az PowerShell module...
+    Write-Host -ForegroundColor Green
+    @"Loading the Az PowerShell module...
     "@
     Import-Module Az
   }
