@@ -1,1 +1,1 @@
-sudo docker run -it ffpp:latest /bin/bash
+sudo docker run -it --net=host ffpp:latest /bin/bash

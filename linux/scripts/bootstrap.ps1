@@ -37,7 +37,7 @@ Installing the Az PowerShell module...
 
 try {
   Write-Host -ForegroundColor Green @"
-When prompted please open a browser window and sign in using the Global Administrator account on your tenant (Probably you made a Global Admin exclusively for use by FFPP? You should do so as you can exclude it from Conditional Access policies and such.)
+When prompted please open a browser window and sign in using the Global Administrator account on your tenant.
 
 "@
   Connect-AzAccount -UseDeviceAuthentication
@@ -92,7 +92,7 @@ Waiting 20 seconds for app to propagate across Azure AD...
 
 "@
 start-sleep 20
-write-warning "Please copy below cyan link into a web browser and sign in using your global administrator:"
+write-warning "Please copy below cyan link into a browser window and sign in using your Global Administrator:"
 write-host -ForegroundColor Cyan @"
 
 https://login.microsoftonline.com/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fgraph.microsoft.com&client_id=$($app.appId)&redirect_uri=https%3A%2F%2Febay.com.au
