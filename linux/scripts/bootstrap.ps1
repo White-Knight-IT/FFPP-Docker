@@ -87,7 +87,7 @@ $spn = New-AzADServicePrincipal -ApplicationId $app.appId
 $adminAgentsGroup = Get-AzADGroup -DisplayName "AdminAgents"
 
 Add-AzADGroupMember -TargetGroupObject $adminAgentsGroup -MemberObjectId $spn.id
-
+write-host " "
 write-warning "Please copy below cyan link into a browser window and sign in using your Global Administrator:"
 write-host -ForegroundColor Cyan @"
 
