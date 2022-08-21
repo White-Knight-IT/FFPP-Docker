@@ -21,13 +21,13 @@ if ( ! ( Get-Module Az ) ) { # Check if the Az PowerShell module is loaded.
 
   if ( Get-Module -ListAvailable -Name Az ) { # The Az PowerShell module is not loaded and it is installed. This module # must be loaded for other operations performed by this script.
     Write-Host -ForegroundColor Green @"
-    Loading the Az PowerShell module...
+Loading the Az PowerShell module...
 "@
     Import-Module Az
   }
   else {
   Write-Host -ForegroundColor Green @"
-  Installing the Az PowerShell module...
+Installing the Az PowerShell module...
 "@
     Install-Module Az -Force
   }
@@ -35,7 +35,8 @@ if ( ! ( Get-Module Az ) ) { # Check if the Az PowerShell module is loaded.
 
 try {
   Write-Host -ForegroundColor Green @"
-  When prompted please open a browser window and sign in using the Global Administrator account on your tenant (Probably you made a Global Admin exclusively for use by FFPP? You should do so as you can exclude it from Conditional Access policies and such.)
+When prompted please open a browser window and sign in using the Global Administrator account on your tenant (Probably you made a Global Admin exclusively for use by FFPP? You should do so as you can exclude it from Conditional Access policies and such.)
+
 "@
   Connect-AzAccount -UseDeviceAuthentication
 }
@@ -112,7 +113,7 @@ catch {}
 try {
   $bootstrapCreds | ConvertTo-Json | Add-Content  -Path "../shared_persistent_volume/bootstrap.json"
   write-host -ForegroundColor Green @"
-  bootstrap.json successfully created.
+bootstrap.json successfully created.
 "@
 }
 catch {
