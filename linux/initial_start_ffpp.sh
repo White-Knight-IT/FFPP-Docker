@@ -189,6 +189,9 @@ then
   sudo ufw allow $ENV_NGINX_HTTPS_PORT"/tcp"
   # Enable Uncomplicated Firewall this will block all inbound traffic except on the above ports
   sudo ufw --force enable
+
+  # Show UFW status
+  sudo ufw status numbered
 fi
 
 # Run Powershell script to generate the bootstrap app used to get the FFPP API up and running
