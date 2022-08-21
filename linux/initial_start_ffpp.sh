@@ -203,3 +203,6 @@ else
   # Run our docker containers - they only build if they are not already built
   sudo docker-compose up -d
 fi
+
+echo " "
+echo "Done! Please wait 60 seconds and access your FFPP instance to finalise setup at: https://"$ENV_FFPP_DOMAIN

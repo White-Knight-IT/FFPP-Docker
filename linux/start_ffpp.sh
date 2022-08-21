@@ -136,3 +136,6 @@ else
   # Run our docker containers - they only build if they are not already built
   sudo docker-compose up -d
 fi
+
+echo " "
+echo "Done! You should now be able to access your FFPP instance."
