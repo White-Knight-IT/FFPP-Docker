@@ -11,7 +11,7 @@ Bootstrap App Creation Script
 
 "@
 
-$DisplayName = "FFPP Bootstrap App"
+$DisplayName = "FFPP Bootstrap"
 $ErrorActionPreference = "Stop"
 Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
 
