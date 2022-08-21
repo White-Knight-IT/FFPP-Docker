@@ -156,7 +156,7 @@ sudo dpkg -i packages-microsoft-prod.deb
 sudo rm -rf packages-microsoft-prod.deb
 
 # Update repo cache and upgrade any tools that need upgrading
-sudo apt update && apt upgrade -yq
+sudo apt update && sudo apt upgrade -yq
 
 # Install needed and useful tools on the host
 sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw apt-transport-https software-properties-common powershell
