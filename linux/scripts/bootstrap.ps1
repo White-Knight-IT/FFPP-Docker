@@ -76,10 +76,11 @@ Add-AzADGroupMember -TargetGroupObject $adminAgentsGroup -MemberObjectId $spn.id
 
 write-host -ForegroundColor Green @"
 
-Waiting 20 seconds for app to propagate across Azure AD....
+Waiting 20 seconds for app to propagate across Azure AD...
+
 "@
 start-sleep 20
-write-warning "Please copy below cyan link into a web browser and sign in:"
+write-warning "Please copy below cyan link into a web browser and sign in using your global administrator:"
 write-host -ForegroundColor Cyan @"
 
 https://login.microsoftonline.com/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fgraph.microsoft.com&client_id=$($app.appId)&redirect_uri=https%3A%2F%2Febay.com.au
@@ -87,6 +88,7 @@ https://login.microsoftonline.com/common/oauth2/authorize?response_type=code&res
 write-host -ForegroundColor Green @"
 
 Press any key after you have signed in.
+
 "@
 [void][system.console]::ReadKey($true)
 
@@ -111,6 +113,7 @@ try {
   $bootstrapCreds | ConvertTo-Json | Add-Content  -Path "../shared_persistent_volume/bootstrap.json"
   write-host -ForegroundColor Green @"
 bootstrap.json successfully created.
+
 "@
 }
 catch {
