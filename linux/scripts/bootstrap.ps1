@@ -22,12 +22,14 @@ if ( ! ( Get-Module Az ) ) { # Check if the Az PowerShell module is loaded.
   if ( Get-Module -ListAvailable -Name Az ) { # The Az PowerShell module is not loaded and it is installed. This module # must be loaded for other operations performed by this script.
     Write-Host -ForegroundColor Green @"
 Loading the Az PowerShell module...
+
 "@
     Import-Module Az
   }
   else {
   Write-Host -ForegroundColor Green @"
 Installing the Az PowerShell module...
+
 "@
     Install-Module Az -Force
   }
@@ -60,13 +62,11 @@ Type = "Scope"}
 }
 
 Write-Host -ForegroundColor Green @"
-
 Creating the Azure AD application and related resources...
+
 "@
 
 $app = New-AzADApplication -SigninAudience AzureADMultipleOrgs -DisplayName $DisplayName -RequiredResourceAccess $graphAppAccess -ReplyUrls @("https://localhost:7074","urn:ietf:wg:oauth:2.0:oob","https://login.microsoftonline.com/organizations/oauth2/nativeclient","https://localhost","http://localhost","http://localhost:8400")
-$app | ConvertTo-Json | Add-Content  -Path "app.json"
-
 $password = New-AzADAppCredential -ObjectId $app.id
 $spn = New-AzADServicePrincipal -ApplicationId $app.appId
 
@@ -74,15 +74,12 @@ $adminAgentsGroup = Get-AzADGroup -DisplayName "AdminAgents"
 
 Add-AzADGroupMember -TargetGroupObject $adminAgentsGroup -MemberObjectId $spn.id
 
-write-host @"
+write-host -ForegroundColor Green @"
 
 Waiting 20 seconds for app to propagate across Azure AD....
 "@
 start-sleep 20
-write-warning @"
-
-Please sign in at:
-"@
+write-warning "Please copy below cyan link into a web browser and sign in:"
 write-host -ForegroundColor Cyan @"
 
 https://login.microsoftonline.com/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fgraph.microsoft.com&client_id=$($app.appId)&redirect_uri=https%3A%2F%2Febay.com.au
