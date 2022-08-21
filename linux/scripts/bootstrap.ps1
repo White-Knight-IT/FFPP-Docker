@@ -47,7 +47,7 @@ catch { # An unexpected error has occurred. The end-user should be notified so t
   Exit
 }
 
-$deviceId=[guid]::NewGuid()
+$deviceId=[guid]::NewGuid().ToString()
 
 try
 {
