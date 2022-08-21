@@ -14,6 +14,10 @@ export CONF_CHECK_DNS=true
 # not super useful for every day use
 export CONF_ALWAYS_FORCE_CONTAINER_REBUILD=false
 
+# If nginx, apache, mini-httpd or other web servers are running on the host we uninstall them because they
+# will conflict with nginx hosted inside the ffpp docker container
+export CONF_REMOVE_HOST_WEB_SERVERS=true
+
 # **************************************************************************************************
 # Environment variables ******************* EDIT THESE TO YOUR VALUES ******************************
 # **************************************************************************************************
@@ -158,6 +162,10 @@ sudo rm -rf packages-microsoft-prod.deb
 # Update repo cache and upgrade any tools that need upgrading
 sudo apt update && sudo apt upgrade -yq
 
+if $CONF_REMOVE_HOST_WEB_SERVERS
+then
+  sudo apt remove -yq nginx apache2 mini-httpd micro-httpd lighttpd caddy openlitespeed
+fi
 # Install needed and useful tools on the host
 sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw apt-transport-https software-properties-common powershell
 
