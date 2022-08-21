@@ -4,7 +4,7 @@ echo "Checking if swapfile already exists: "
 echo " "
 sudo swapon --show
 echo " "
-echo "Do you see a swapfile in the above output? [y/N]: "
+echo "Do you see a swapfile in the above output? [Y/n]: "
 read inputVar
 if [ $inputVar = "y" ]||[ $inputVar = "Y" ]
 then

@@ -191,6 +191,9 @@ then
   sudo ufw --force enable
 fi
 
+# Run Powershell script to generate the bootstrap app used to get the FFPP API up and running
+pwsh scripts/bootstrap.ps1
+
 if $CONF_ALWAYS_FORCE_CONTAINER_REBUILD
 then
   # Run our docker containers - they will always build
