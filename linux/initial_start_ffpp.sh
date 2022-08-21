@@ -205,4 +205,9 @@ else
 fi
 
 echo " "
+# Show running docker containers, hopefully both our containers are running
+sudo docker ps
+
+echo " "
+echo " "
 echo "Done! Please wait 60 seconds and access your FFPP instance to finalise setup at: https://"$ENV_FFPP_DOMAIN
