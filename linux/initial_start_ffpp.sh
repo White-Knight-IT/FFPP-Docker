@@ -150,6 +150,8 @@ then
   exit 1
 fi
 
+echo "Installing Microsoft repository for powershell"
+
 # Get Microsoft repository
 wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
 
@@ -162,10 +164,14 @@ sudo rm -rf packages-microsoft-prod.deb
 # Update repo cache and upgrade any tools that need upgrading
 sudo apt update && sudo apt upgrade -yq
 
+# Uninstall any web servers on the host
 if $CONF_REMOVE_HOST_WEB_SERVERS
 then
+  echo "**** UNINSTALLING ANY EXISTING WEB SERVERS ON HOST ****"
   sudo apt remove -yq nginx apache2 mini-httpd micro-httpd lighttpd caddy openlitespeed
 fi
+
+echo "Installing tools on host..."
 # Install needed and useful tools on the host
 sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw apt-transport-https software-properties-common powershell
 
@@ -197,11 +203,12 @@ then
   sudo ufw allow $ENV_NGINX_HTTPS_PORT"/tcp"
   # Enable Uncomplicated Firewall this will block all inbound traffic except on the above ports
   sudo ufw --force enable
-
+  echo "Enabled uncomplicated firewall (ufw)"
   # Show UFW status
   sudo ufw status numbered
 fi
 
+echo "Start bootstrap app creation powershell script"
 # Run Powershell script to generate the bootstrap app used to get the FFPP API up and running
 pwsh scripts/bootstrap.ps1
 
