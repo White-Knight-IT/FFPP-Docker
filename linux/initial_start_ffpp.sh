@@ -195,7 +195,6 @@ then
 
   if [ "$ENV_MY_IP" = "$ENV_DOMAIN_FOUND_IP" ]
   then
-    echo " "
     echo "Great, FFPP domain is pointing to this server"
     echo " "
   else
