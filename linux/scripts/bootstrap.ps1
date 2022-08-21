@@ -47,6 +47,18 @@ catch { # An unexpected error has occurred. The end-user should be notified so t
   Exit
 }
 
+$deviceId=[guid]::NewGuid()
+
+try
+{
+  Remove-Item "../shared_persistent_volume/device.id.token"
+}
+catch {}
+
+$deviceId | Out-File -FilePath "../shared_persistent_volume/device.id.token"
+
+$DisplayName = $DisplayName" - "$deviceId.Substring($deviceId.Length - 6)
+
 $user = Get-AzADUser -SignedIn
 $TenantId = $user.Mail.Split('@')[1]
 
