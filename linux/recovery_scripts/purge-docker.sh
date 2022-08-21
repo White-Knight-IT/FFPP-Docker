@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Stop the docker compose session if running
+sudo docker-compose down
+
 # Stop all running containers
 sudo docker stop $(sudo docker ps -a -q)
 
