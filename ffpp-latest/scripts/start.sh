@@ -7,4 +7,4 @@ kill $(cat /var/run/nginx.pid)
 nginx
 
 # Start the FFPP API
-dotnet /root/ffpp/built/FFPP.dll
+dotnet /root/ffpp/built/ffpp.dll
