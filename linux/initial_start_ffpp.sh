@@ -146,11 +146,12 @@ export ENV_HOST_SSH_PORT="22/tcp"
 
 if [ "$ENV_FFPP_DOMAIN" = "ffpp.yourdomainhere.com" ]
 then
-  echo "** YOU MUST EDIT THE VARIABLES IN THIS SCRIPT BEFORE RUNING IT (e.g. run \"nano start_ffpp.sh\") ** - Exiting......"
+  echo "** YOU MUST EDIT THE VARIABLES IN THIS SCRIPT BEFORE RUNING IT (e.g. run \"nano start_ffpp.sh\") ** - Exiting..."
   exit 1
 fi
-
-echo "Installing Microsoft repository for powershell"
+echo " "
+echo "Installing Microsoft repository for powershell..."
+echo " "
 
 # Get Microsoft repository
 wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
@@ -167,11 +168,15 @@ sudo apt update && sudo apt upgrade -yq
 # Uninstall any web servers on the host
 if $CONF_REMOVE_HOST_WEB_SERVERS
 then
+  echo " "
   echo "**** UNINSTALLING ANY EXISTING WEB SERVERS ON HOST ****"
+  echo " "
   sudo apt remove -yq nginx apache2 mini-httpd micro-httpd lighttpd caddy openlitespeed
 fi
 
+echo " "
 echo "Installing tools on host..."
+echo " "
 # Install needed and useful tools on the host
 sudo apt install -yq dnsutils docker.io docker-compose mariadb-client ufw apt-transport-https software-properties-common powershell
 
@@ -183,14 +188,20 @@ then
   # Ensure that the FFPP domain name is pointing to this servers IP address (necessary for LE cert)
   export ENV_MY_IP="$(dig +short myip.opendns.com @resolver1.opendns.com)"
   export ENV_DOMAIN_FOUND_IP="$(dig +short ${ENV_FFPP_DOMAIN})"
+  echo " "
   echo "This server IP address: "$ENV_MY_IP
   echo "The IP found in dns lookup for domain: "$ENV_FFPP_DOMAIN" is: "$ENV_DOMAIN_FOUND_IP
+  echo " "
 
   if [ "$ENV_MY_IP" = "$ENV_DOMAIN_FOUND_IP" ]
   then
+    echo " "
     echo "Great, FFPP domain is pointing to this server"
+    echo " "
   else
-    echo "ERROR: Server IP and Domain Lookup IP DO NOT MATCH!!!!! - Exiting.........."
+    echo " "
+    echo "ERROR: Server IP and Domain Lookup IP DO NOT MATCH!!!!! - Exiting..."
+    echo " "
     exit 1
   fi
 fi
@@ -203,19 +214,25 @@ then
   sudo ufw allow $ENV_NGINX_HTTPS_PORT"/tcp"
   # Enable Uncomplicated Firewall this will block all inbound traffic except on the above ports
   sudo ufw --force enable
+  echo " "
   echo "Enabled uncomplicated firewall (ufw)"
+  echo " "
   # Show UFW status
   sudo ufw status numbered
 fi
 
+echo " "
 echo "Start bootstrap app creation powershell script"
+echo " "
 # Run Powershell script to generate the bootstrap app used to get the FFPP API up and running
 pwsh scripts/bootstrap.ps1
 
 if $CONF_ALWAYS_FORCE_CONTAINER_REBUILD
 then
   # Run our docker containers - they will always build
+  echo " "
   echo "Rebuild the containers"
+  echo " "
   sudo docker-compose up -d --build
 else
   # Run our docker containers - they only build if they are not already built
