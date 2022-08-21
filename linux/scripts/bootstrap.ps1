@@ -57,7 +57,7 @@ catch {}
 
 $deviceId | Out-File -FilePath "../shared_persistent_volume/device.id.token"
 
-$DisplayName = $DisplayName" - "$deviceId.Substring($deviceId.Length - 6)
+$DisplayName = "$DisplayName - $deviceId.Substring($deviceId.Length - 6)"
 
 $user = Get-AzADUser -SignedIn
 $TenantId = $user.Mail.Split('@')[1]
