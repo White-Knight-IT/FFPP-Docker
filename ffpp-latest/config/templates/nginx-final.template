@@ -34,7 +34,7 @@ server {
     proxy_set_header      Proxy "";
   }
 
-  # Any requests for swagger will also go to Kestrel over https/7074
+  # Any requests with word swagger will go to Kestrel over https/7074
   location ~* ^/swagger {
     proxy_pass https://localhost:7074;
     proxy_read_timeout    90;

@@ -22,6 +22,8 @@ fi
 # Kill nginx
 kill $(cat /var/run/nginx.pid)
 
+sleep 5
+
 # Start nginx
 nginx
 
