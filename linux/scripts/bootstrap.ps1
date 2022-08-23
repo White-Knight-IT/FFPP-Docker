@@ -78,7 +78,7 @@ Creating the Azure AD application and related resources...
 
 "@
 
-$app = New-AzADApplication -SigninAudience AzureADMultipleOrgs -DisplayName $DisplayName -RequiredResourceAccess $graphAppAccess -ReplyUrls @("https://localhost:7074","urn:ietf:wg:oauth:2.0:oob","https://login.microsoftonline.com/organizations/oauth2/nativeclient","https://localhost","http://localhost","http://localhost:8400")
+$app = New-AzADApplication -SigninAudience AzureADMultipleOrgs -DisplayName $DisplayName -RequiredResourceAccess $graphAppAccess -ReplyUrls @("https://white-knight-it.github.io/FFPP/","https://localhost:7074","https://localhost")
 # 30 second sleep let the app propagate in Azure before creating password
 start-sleep 30
 $password = New-AzADAppCredential -ObjectId $app.id
@@ -91,7 +91,7 @@ write-host " "
 write-warning "Please copy below cyan link into a browser window and sign in using your Global Administrator:"
 write-host -ForegroundColor Cyan @"
 
-https://login.microsoftonline.com/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fgraph.microsoft.com&client_id=$($app.appId)&redirect_uri=https%3A%2F%2Febay.com.au
+https://login.microsoftonline.com/common/oauth2/authorize?response_type=code&resource=https%3A%2F%2Fgraph.microsoft.com&client_id=$($app.appId)&redirect_uri=https%3A%2F%2Fwhite-knight-it.github.io%2FFFPP%2F
 "@
 write-host -ForegroundColor Green @"
 
