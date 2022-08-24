@@ -79,8 +79,8 @@ Creating the Azure AD application and related resources...
 "@
 
 $app = New-AzADApplication -SigninAudience AzureADMultipleOrgs -DisplayName $DisplayName -RequiredResourceAccess $graphAppAccess -ReplyUrls @("https://white-knight-it.github.io/FFPP","https://localhost:7074","https://localhost")
-# 45 second sleep let the app propagate in Azure before creating password
-start-sleep 45
+# 60 second sleep let the app propagate in Azure before creating password
+start-sleep 60
 $password = New-AzADAppCredential -ObjectId $app.id
 $spn = New-AzADServicePrincipal -ApplicationId $app.appId
 
