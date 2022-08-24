@@ -73,7 +73,7 @@ RUN git clone https://github.com/White-Knight-IT/FFPP.git /root/ffpp/src
 
 RUN . /root/scripts/config-dotnet-appsettings.sh
 
-RUN dotnet build --configuration Release /root/ffpp/src/FFPP.sln
+RUN dotnet build --configuration Release /root/ffpp/src/FFPP/FFPP.csproj
 
 RUN rm /root/ffpp/src/FFPP/bin/Release/net6.0/appsettings.Development.json
 
