@@ -23,7 +23,7 @@ server {
   error_log /root/ffpp/persistent/nginx_logs/error/${FFPP_DOMAIN}_${NGINX_HTTPS_PORT}_error.log;
 
   # We will reverse proxy direct any API requests to Kestrel over https/7074
-  location ~* ^/(api|v[0-9]\.[0-9])/ {
+  location ~* ^/(api|v[0-9]\.[0-9]|.auth|bootstrap)/ {
     proxy_pass https://localhost:7074;
     proxy_read_timeout    90;
     proxy_connect_timeout 90;
