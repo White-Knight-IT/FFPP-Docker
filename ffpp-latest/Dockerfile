@@ -75,13 +75,11 @@ RUN . /root/scripts/config-dotnet-appsettings.sh
 
 RUN dotnet build --configuration Release /root/ffpp/src/FFPP/FFPP.csproj
 
-RUN rm /root/ffpp/src/FFPP/bin/Release/net6.0/appsettings.Development.json
-
-RUN cp -R /root/ffpp/src/FFPP/bin/Release/net6.0/wwwroot/* /var/www/ffpp-webfront
-
 RUN mv /root/ffpp/src/FFPP/bin/Release/net6.0/* /root/ffpp/built
 
 WORKDIR /var/www/
+
+RUN git clone git@github.com:White-Knight-IT/FFPP-WWW.git ffpp-webfront
 
 RUN find . -type f -exec chmod 0644 {} \;
 
