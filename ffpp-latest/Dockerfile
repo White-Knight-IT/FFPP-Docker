@@ -79,7 +79,7 @@ RUN mv /root/ffpp/src/FFPP/bin/Release/net6.0/* /root/ffpp/built
 
 WORKDIR /var/www/
 
-RUN git clone git@github.com:White-Knight-IT/FFPP-WWW.git ffpp-webfront
+RUN git clone https://github.com/White-Knight-IT/FFPP-WWW.git ffpp-webfront
 
 RUN find . -type f -exec chmod 0644 {} \;
 
