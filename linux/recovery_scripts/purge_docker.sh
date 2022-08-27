@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ~/FFPP-Docker/linux
 # Stop the docker compose session if running
 sudo docker-compose down
 
