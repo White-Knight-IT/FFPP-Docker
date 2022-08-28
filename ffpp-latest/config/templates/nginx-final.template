@@ -22,6 +22,12 @@ server {
   access_log /root/ffpp/persistent/nginx_logs/access/${FFPP_DOMAIN}_${NGINX_HTTPS_PORT}_access.log;
   error_log /root/ffpp/persistent/nginx_logs/error/${FFPP_DOMAIN}_${NGINX_HTTPS_PORT}_error.log;
 
+  # We will never serve these file extensions from this site
+  location ~\.(aes|bytes|token|json|sh|md)$ {
+    deny all;
+    return 403;
+  }
+
   # We will reverse proxy direct any API requests to Kestrel over http/7073
   location ~* ^/(api|v[0-9]\.[0-9]|.auth|bootstrap)/ {
     proxy_pass http://localhost:7073;
