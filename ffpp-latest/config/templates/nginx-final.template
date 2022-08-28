@@ -23,7 +23,7 @@ server {
   error_log /root/ffpp/persistent/nginx_logs/error/${FFPP_DOMAIN}_${NGINX_HTTPS_PORT}_error.log;
 
   # We will never serve these file extensions from this site
-  location ~\.(aes|bytes|token|json|sh|md)$ {
+  location ~\.(aes|bytes|token|json|sh|md|gitignore|git)$ {
     deny all;
     return 403;
   }
