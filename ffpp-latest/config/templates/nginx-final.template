@@ -36,7 +36,7 @@ server {
 
   # Make sure we divert swagger custom/static resources to the web-front
   location ~* ^/swagger/favicon-16x16.png|^/swagger/favicon-32x32.png|^/swagger/css|^/swagger/img|^/swagger/js {
-    root /Users/hdizzle/Projects/FFPP/FFPP/wwwroot/;
+    root /var/www/ffpp-webfront;
     index index.html;
     try_files $uri $uri/ =404;
   }
