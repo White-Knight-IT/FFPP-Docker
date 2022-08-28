@@ -17,6 +17,7 @@ server {
   add_header Cache-Control "public";
   add_header X-Content-Type-Options nosniff;
   add_header Content-Security-Policy "default-src 'self' 'unsafe-inline' https: *.${FFPP_DOMAIN} data:";
+  add_header Set-Cookie "Path=/; HttpOnly; Secure";
 
   # write logs to persistent, will allow ingestion to SEIM to monitor for unauthorised traffic etc
   access_log /root/ffpp/persistent/nginx_logs/access/${FFPP_DOMAIN}_${NGINX_HTTPS_PORT}_access.log;
@@ -38,6 +39,8 @@ server {
     proxy_set_header      X-Real-IP $remote_addr;
     proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header      Proxy "";
+    proxy_set_header Authorization $http_authorization;
+    proxy_pass_header  Authorization;
   }
 
   # Make sure we divert swagger custom/static resources to the web-front
@@ -57,6 +60,8 @@ server {
     proxy_set_header      X-Real-IP $remote_addr;
     proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header      Proxy "";
+    proxy_set_header Authorization $http_authorization;
+    proxy_pass_header  Authorization;
   }
 
   # This will catch all other requests and either serve the index or file else 404
