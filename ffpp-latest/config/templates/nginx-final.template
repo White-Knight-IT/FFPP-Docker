@@ -34,6 +34,13 @@ server {
     proxy_set_header      Proxy "";
   }
 
+  # Make sure we divert swagger custom/static resources to the web-front
+  location ~* ^/swagger/favicon-16x16.png|^/swagger/favicon-32x32.png|^/swagger/css|^/swagger/img|^/swagger/js {
+    root /Users/hdizzle/Projects/FFPP/FFPP/wwwroot/;
+    index index.html;
+    try_files $uri $uri/ =404;
+  }
+
   # Any requests for swagger will go to Kestrel over https/7074
   location ~* ^/swagger$|^/swagger/ {
     proxy_pass https://localhost:7074;
