@@ -13,8 +13,6 @@ server {
   ssl_certificate /etc/letsencrypt/live/${FFPP_DOMAIN}/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/${FFPP_DOMAIN}/privkey.pem;
 
-  expires 12m; # It's aggressive yea, not sure if I will leave it like this
-  add_header Cache-Control "public";
   add_header X-Content-Type-Options nosniff;
   add_header Content-Security-Policy "default-src 'self' 'unsafe-inline' https: *.${FFPP_DOMAIN} data:";
   add_header Set-Cookie "Path=/; HttpOnly; Secure";
@@ -35,12 +33,15 @@ server {
     proxy_read_timeout    90;
     proxy_connect_timeout 90;
     proxy_http_version 1.1;
+    proxy_cache off;
     proxy_set_header      Host $host;
     proxy_set_header      X-Real-IP $remote_addr;
     proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header      Proxy "";
     proxy_set_header Authorization $http_authorization;
     proxy_pass_header  Authorization;
+    add_header 'Cache-Control' 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+    expires off;
   }
 
   # Make sure we divert swagger custom/static resources to the web-front
@@ -58,12 +59,15 @@ server {
     proxy_read_timeout    90;
     proxy_connect_timeout 90;
     proxy_http_version 1.1;
+    proxy_cache off;
     proxy_set_header      Host $host;
     proxy_set_header      X-Real-IP $remote_addr;
     proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header      Proxy "";
     proxy_set_header Authorization $http_authorization;
     proxy_pass_header  Authorization;
+    add_header 'Cache-Control' 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0';
+    expires off;
   }
 
   # We want to browser cache these static assets
