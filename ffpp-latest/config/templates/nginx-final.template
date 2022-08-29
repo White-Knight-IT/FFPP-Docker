@@ -68,15 +68,16 @@ server {
 
   # We want to browser cache these static assets
   location ~* \.(css|gif|jpg|js|png|ico|otf|svg|xls|jpeg|woff|woff2|ttf)$ {
-    root /var/www/ffpp-webfront;
-    index index.html;
     add_header Cache-Control "public";
     expires 4h;
+    root /var/www/ffpp-webfront;
+    index index.html;
     try_files $uri $uri/ =404;
   }
 
   # This will catch all other requests and either serve the index or file else 404
   location / {
+    add_header Cache-Control 'no-store';
     root /var/www/ffpp-webfront;
     index index.html;
     try_files $uri $uri/ =404;
