@@ -47,6 +47,8 @@ server {
   location ~* ^/swagger/favicon-16x16.png|^/swagger/favicon-32x32.png|^/swagger/css|^/swagger/img|^/swagger/js {
     root /var/www/ffpp-webfront;
     index index.html;
+    add_header Cache-Control "public";
+    expires max;
     try_files $uri $uri/ =404;
   }
 
@@ -64,9 +66,17 @@ server {
     proxy_pass_header  Authorization;
   }
 
+  # We want to browser cache these static assets
+  location ~* \.(css|gif|jpg|js|png|ico|otf|svg|xls|jpeg|woff|woff2|ttf)$ {
+    root /Users/hdizzle/Projects/FFPP/FFPP/wwwroot/;
+    index index.html;
+    add_header Cache-Control "public";
+    expires 4h;
+    try_files $uri $uri/ =404;
+  }
+
   # This will catch all other requests and either serve the index or file else 404
   location / {
-    # This is from where we will serve static assets html/css/js/images and the like
     root /var/www/ffpp-webfront;
     index index.html;
     try_files $uri $uri/ =404;
