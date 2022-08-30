@@ -144,8 +144,8 @@ export ENV_HOST_SSH_PORT="22/tcp"
 
 
 
-
-
+echo " "
+echo "Start creation of FFPP accessable via: "$ENV_FFPP_DOMAIN
 
 if [ "$ENV_FFPP_DOMAIN" = "ffpp.yourdomainhere.com" ]
 then
