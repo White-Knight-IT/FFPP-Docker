@@ -23,7 +23,7 @@ services:
         DNS_PROVIDER: ${ENV_DNS_PROVIDER}
     volumes:
       - type: bind
-        source: ../shared_persistent_volume
+        source: ../persistent/ffpp
         target: /root/ffpp/persistent
       - type: tmpfs
         target: /root/ffpp/cache
@@ -45,7 +45,7 @@ services:
         MARIADB_ROOT_PASSWORD: ${ENV_MARIADB_ROOT_PASSWORD}
     volumes:
       - type: bind
-        source: ../shared_persistent_volume/mariadb_data
+        source: ../persistent/ffpp-db/mariadb_data
         target: /var/lib/mysql
     network_mode: host
     restart: on-failure
