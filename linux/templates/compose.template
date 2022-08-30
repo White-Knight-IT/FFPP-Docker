@@ -42,6 +42,7 @@ services:
         MARIADB_USER: ${ENV_MARIADB_USER}
         MARIADB_PASSWORD: ${ENV_MARIADB_PASSWORD}
         MARIADB_PORT: ${ENV_MARIADB_PORT}
+        MARIADB_ROOT_PASSWORD_IN: ${ENV_MARIADB_ROOT_PASSWORD}
     volumes:
       - type: bind
         source: ../shared_persistent_volume/mariadb_data
