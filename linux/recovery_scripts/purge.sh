@@ -4,10 +4,10 @@ cd ~/FFPP-Docker/linux
 
 sh ~/FFPP-Docker/linux/recovery_scripts/purge_docker.sh
 
-sudo rm -rf ~/FFPP-Docker/shared_persistent_volume/mariadb_data/*
+sudo rm -rf ~/FFPP-Docker/persistent/ffpp-db/mariadb_data/*
 
-sudo rm ~/FFPP-Docker/shared_persistent_volume/api.zeroconf.aes
+sudo rm ~/FFPP-Docker/persistent/ffpp/api.zeroconf.aes
 
-sudo rm ~/FFPP-Docker/shared_persistent_volume/bootstrap.json
+sudo rm ~/FFPP-Docker/persistent/ffpp/bootstrap.json
 
-sudo rm ~/FFPP-Docker/shared_persistent_volume/unique.entropy.bytes
+sudo rm ~/FFPP-Docker/persistent/ffpp/unique.entropy.bytes
