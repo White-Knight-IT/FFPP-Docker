@@ -149,6 +149,7 @@ echo "Start creation of FFPP accessable via: "$ENV_FFPP_DOMAIN
 
 if [ "$ENV_FFPP_DOMAIN" = "ffpp.yourdomainhere.com" ]
 then
+  echo " "
   echo "** YOU MUST EDIT THE VARIABLES IN THIS SCRIPT BEFORE RUNING IT (e.g. run \"nano start_ffpp.sh\") ** - Exiting..."
   exit 1
 fi
