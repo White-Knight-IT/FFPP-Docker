@@ -51,11 +51,11 @@ $deviceId=[guid]::NewGuid().ToString()
 
 try
 {
-  Remove-Item "../shared_persistent_volume/device.id.token"
+  Remove-Item "../persistent/ffpp/device.id.token"
 }
 catch {}
 
-$deviceId | Out-File -FilePath "../shared_persistent_volume/device.id.token"
+$deviceId | Out-File -FilePath "../persistent/ffpp/device.id.token"
 $devicetag = $deviceId.Substring($deviceId.Length - 6)
 $DisplayName = "$DisplayName - $devicetag"
 
@@ -118,12 +118,12 @@ ApplicationSecret = $pwd
 
 try
 {
-  Remove-Item "../shared_persistent_volume/bootstrap.json"
+  Remove-Item "../persistent/ffpp/bootstrap.json"
 }
 catch {}
 
 try {
-  $bootstrapCreds | ConvertTo-Json | Add-Content  -Path "../shared_persistent_volume/bootstrap.json"
+  $bootstrapCreds | ConvertTo-Json | Add-Content  -Path "../persistent/ffpp/bootstrap.json"
   write-host -ForegroundColor Green @"
 bootstrap.json successfully created.
 
