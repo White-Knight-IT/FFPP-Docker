@@ -26,7 +26,3 @@ sleep 5
 
 # Start nginx
 nginx
-
-# write 0 to stderr so docker is happy it succeeded (Even if it did not, so the container build can still proceed),
-# is this necessary? Dunno, but seems like a good idea lol.
->&2 echo 0
