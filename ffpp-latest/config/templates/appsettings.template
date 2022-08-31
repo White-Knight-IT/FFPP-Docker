@@ -13,14 +13,14 @@
     "ShowSwaggerUi": true,
     "RunSwagger": true,
     "ServeStaticFiles": false,
-    "ShowDevEndpoints": ${SHOW_DEV_ENDPOINTS},
-    "WebUiUrl": "https://${FFPP_DOMAIN}",
-    "DnsProvider": "${DNS_PROVIDER}",
+    "ShowDevEndpoints": ${ARG_SHOW_DEV_ENDPOINTS},
+    "WebUiUrl": "https://${ARG_FFPP_DOMAIN}",
+    "DnsProvider": "${ARG_DNS_PROVIDER}",
     "DbSettings": {
-      "MysqlUser": "${MARIADB_USER}",
-      "MysqlPassword": "${MARIADB_PASSWORD}",
-      "MysqlServer": "${MARIADB_SERVER}",
-      "MysqlServerPort": "${MARIADB_PORT}"
+      "MysqlUser": "${ARG_MARIADB_USER}",
+      "MysqlPassword": "${ARG_MARIADB_PASSWORD}",
+      "MysqlServer": "${ARG_MARIADB_SERVER}",
+      "MysqlServerPort": "${ARG_MARIADB_PORT}"
     }
   },
   "Kestrel": {

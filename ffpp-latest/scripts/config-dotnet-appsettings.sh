@@ -1,6 +1,6 @@
 #!/bin/bash
 rm -rf /root/ffpp/src/FFPP/appsettings*
 
-envsubst '${FFPP_DOMAIN} ${MARIADB_USER} ${MARIADB_PASSWORD} ${MARIADB_SERVER} ${MARIADB_PORT} ${SHOW_DEV_ENDPOINTS} ${DNS_PROVIDER}' < /root/config/templates/appsettings.template > /root/ffpp/built/appsettings.json
+envsubst '${ARG_FFPP_DOMAIN} ${ARG_MARIADB_USER} ${ARG_MARIADB_PASSWORD} ${ARG_MARIADB_SERVER} ${ARG_MARIADB_PORT} ${ARG_SHOW_DEV_ENDPOINTS} ${ARG_DNS_PROVIDER}' < /root/config/templates/appsettings.template > /root/ffpp/built/appsettings.json
 
 cp /root/ffpp/built/appsettings.json /root/ffpp/src/FFPP/appsettings.json

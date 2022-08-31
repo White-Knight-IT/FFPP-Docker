@@ -7,19 +7,19 @@ server {
   # Needs statically compressed .gz files for this to happen
   gzip_static on;
 
-  listen ${NGINX_HTTPS_PORT} ssl http2;
+  listen ${ARG_NGINX_HTTPS_PORT} ssl http2;
 
   # I didn't see any dire need to persist certs, they can live by the container, die by the container.
-  ssl_certificate /etc/letsencrypt/live/${FFPP_DOMAIN}/fullchain.pem;
-  ssl_certificate_key /etc/letsencrypt/live/${FFPP_DOMAIN}/privkey.pem;
+  ssl_certificate /etc/letsencrypt/live/${ARG_FFPP_DOMAIN}/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/${ARG_FFPP_DOMAIN}/privkey.pem;
 
   add_header X-Content-Type-Options nosniff;
-  add_header Content-Security-Policy "default-src 'self' 'unsafe-inline' https: *.${FFPP_DOMAIN} data:";
+  add_header Content-Security-Policy "default-src 'self' 'unsafe-inline' https: *.${ARG_FFPP_DOMAIN} data:";
   add_header Set-Cookie "Path=/; HttpOnly; Secure";
 
   # write logs to persistent, will allow ingestion to SEIM to monitor for unauthorised traffic etc
-  access_log /root/ffpp/persistent/nginx_logs/access/${FFPP_DOMAIN}_${NGINX_HTTPS_PORT}_access.log;
-  error_log /root/ffpp/persistent/nginx_logs/error/${FFPP_DOMAIN}_${NGINX_HTTPS_PORT}_error.log;
+  access_log /root/ffpp/persistent/nginx_logs/access/${ARG_FFPP_DOMAIN}_${ARG_NGINX_HTTPS_PORT}_access.log;
+  error_log /root/ffpp/persistent/nginx_logs/error/${ARG_FFPP_DOMAIN}_${ARG_NGINX_HTTPS_PORT}_error.log;
 
   # We will never serve these file extensions from this site
   location ~\.(aes|bytes|token|json|sh|md|gitignore|git)$ {
@@ -90,15 +90,15 @@ server {
 
 server {
   # Prety much this only exists for ACME certificate renewals, and to reply 301 improve yourself with a dose of encryption
-  listen  ${NGINX_HTTP_PORT};
+  listen  ${ARG_NGINX_HTTP_PORT};
 
-  access_log /root/ffpp/persistent/nginx_logs/access/${FFPP_DOMAIN}_${NGINX_HTTP_PORT}_access.log;
-  error_log /root/ffpp/persistent/nginx_logs/error/${FFPP_DOMAIN}_${NGINX_HTTP_PORT}_error.log;
+  access_log /root/ffpp/persistent/nginx_logs/access/${ARG_FFPP_DOMAIN}_${ARG_NGINX_HTTP_PORT}_access.log;
+  error_log /root/ffpp/persistent/nginx_logs/error/${ARG_FFPP_DOMAIN}_${ARG_NGINX_HTTP_PORT}_error.log;
 
-  server_name ${FFPP_DOMAIN};
+  server_name ${ARG_FFPP_DOMAIN};
 
   # Surely it's plain to see that we are forcing all plain connections to secure ones here
-  if ($host = ${FFPP_DOMAIN}) {
+  if ($host = ${ARG_FFPP_DOMAIN}) {
     return 301 https://$host$request_uri;
   }
 

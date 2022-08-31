@@ -11,16 +11,16 @@ services:
       network: host
       dockerfile: ../ffpp-latest/Dockerfile
       args:
-        TIMEZONE: ${ENV_TIMEZONE}
-        FFPP_DOMAIN: ${ENV_FFPP_DOMAIN}
-        NGINX_HTTP_PORT: ${ENV_NGINX_HTTP_PORT}
-        NGINX_HTTPS_PORT: ${ENV_NGINX_HTTPS_PORT}
-        MARIADB_USER: ${ENV_MARIADB_USER}
-        MARIADB_PASSWORD: ${ENV_MARIADB_PASSWORD}
-        MARIADB_SERVER: ${ENV_MARIADB_SERVER}
-        MARIADB_PORT: ${ENV_MARIADB_PORT}
-        SHOW_DEV_ENDPOINTS: ${ENV_SHOW_DEV_ENDPOINTS}
-        DNS_PROVIDER: ${ENV_DNS_PROVIDER}
+        ARG_TIMEZONE: ${ENV_TIMEZONE}
+        ARG_FFPP_DOMAIN: ${ENV_FFPP_DOMAIN}
+        ARG_NGINX_HTTP_PORT: ${ENV_NGINX_HTTP_PORT}
+        ARG_NGINX_HTTPS_PORT: ${ENV_NGINX_HTTPS_PORT}
+        ARG_MARIADB_USER: ${ENV_MARIADB_USER}
+        ARG_MARIADB_PASSWORD: ${ENV_MARIADB_PASSWORD}
+        ARG_MARIADB_SERVER: ${ENV_MARIADB_SERVER}
+        ARG_MARIADB_PORT: ${ENV_MARIADB_PORT}
+        ARG_SHOW_DEV_ENDPOINTS: ${ENV_SHOW_DEV_ENDPOINTS}
+        ARG_DNS_PROVIDER: ${ENV_DNS_PROVIDER}
     volumes:
       - type: bind
         source: ../persistent/ffpp
@@ -39,10 +39,10 @@ services:
       dockerfile: ../ffpp-mariadb-latest/Dockerfile
       args:
         TIMEZONE: ${ENV_TIMEZONE}
-        MARIADB_USER: ${ENV_MARIADB_USER}
-        MARIADB_PASSWORD: ${ENV_MARIADB_PASSWORD}
-        MARIADB_PORT: ${ENV_MARIADB_PORT}
-        MARIADB_ROOT_PASSWORD: ${ENV_MARIADB_ROOT_PASSWORD}
+        ARG_MARIADB_USER: ${ENV_MARIADB_USER}
+        ARG_MARIADB_PASSWORD: ${ENV_MARIADB_PASSWORD}
+        ARG_MARIADB_PORT: ${ENV_MARIADB_PORT}
+        ARG_MARIADB_ROOT_PASSWORD: ${ENV_MARIADB_ROOT_PASSWORD}
     volumes:
       - type: bind
         source: ../persistent/ffpp-db/mariadb_data

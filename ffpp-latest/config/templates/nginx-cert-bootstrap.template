@@ -1,4 +1,4 @@
 server {
-  listen ${NGINX_HTTP_PORT};
-  server_name ${FFPP_DOMAIN};
+  listen ${ARG_NGINX_HTTP_PORT};
+  server_name ${ARG_FFPP_DOMAIN};
 }

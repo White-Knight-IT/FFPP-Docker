@@ -19,21 +19,15 @@
 # This group is read both by the client and the server
 # use it for options that affect everything
 #
-[client]
-protocol=tcp
 
 [client-server]
 # Port or socket location where to connect
-port = ${MARIADB_PORT}
+port = ${ARG_MARIADB_PORT}
 
 # Import all .cnf files from configuration directory
 [mariadbd]
 skip-host-cache
 max-connections=4096
-
-[mysqld]
-# This is important so it dopesn't bind strictly to loopback in the docker container
-bind-address = 0.0.0.0
 
 !includedir /etc/mysql/mariadb.conf.d/
 !includedir /etc/mysql/conf.d/
