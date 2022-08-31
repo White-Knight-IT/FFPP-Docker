@@ -33,5 +33,3 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -yq
 RUN DEBIAN_FRONTEND=noninteractive apt-get -yq install tzdata openssl ca-certificates nano dnsutils net-tools gettext-base
 
 RUN . /root/scripts/config-mariadb.sh
-
-# COPY ./sql-scripts/ /docker-entrypoint-initdb.d/
