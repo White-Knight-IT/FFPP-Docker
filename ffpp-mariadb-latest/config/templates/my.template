@@ -29,8 +29,5 @@ port = ${ARG_MARIADB_PORT}
 skip-host-cache
 max-connections=4096
 
-[mysqld]
-bind-address = 0.0.0.0
-
 !includedir /etc/mysql/mariadb.conf.d/
 !includedir /etc/mysql/conf.d/
