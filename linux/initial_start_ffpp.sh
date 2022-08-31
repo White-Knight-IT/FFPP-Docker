@@ -46,7 +46,7 @@ export ENV_MARIADB_PASSWORD="wellknownpassword"
 export ENV_MARIADB_ROOT_PASSWORD="wellknownpassword"
 
 # Hostname or IP of mariaDB instance to use, probably you won't change this
-export ENV_MARIADB_SERVER="localhost"
+export ENV_MARIADB_SERVER="127.0.0.1"
 
 # Deliberately not the default 3306 in case your host already is running mariaDB/MySQL,
 # you can change it if you want
