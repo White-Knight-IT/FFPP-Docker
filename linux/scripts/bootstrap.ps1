@@ -69,7 +69,14 @@ ResourceAccess =
 Id = "1bfefb4e-e0b5-418b-a88f-73c46d2cc8e9";
 Type = "Role"},
 @{
+Id = "62a82d76-70ea-41e2-9197-370581804d09";
+Type = "Role"},
+@{
 Id = "e1fe6dd8-ba31-4d61-89e7-88639da4683d";
+Type = "Scope"}
+},
+@{
+Id = "4e46008b-f24c-477d-8fff-7bb4ec7aafe0";
 Type = "Scope"}
 }
 
@@ -86,12 +93,12 @@ Creating app password...
 
 "@
 $password = New-AzADAppCredential -ObjectId $app.id
-$spn = New-AzADServicePrincipal -ApplicationId $app.appId
+#$spn = New-AzADServicePrincipal -ApplicationId $app.appId
 start-sleep 30
 
-$adminAgentsGroup = Get-AzADGroup -DisplayName "AdminAgents"
+#$adminAgentsGroup = Get-AzADGroup -DisplayName "AdminAgents"
 
-Add-AzADGroupMember -TargetGroupObject $adminAgentsGroup -MemberObjectId $spn.id
+#Add-AzADGroupMember -TargetGroupObject $adminAgentsGroup -MemberObjectId $spn.id
 write-host " "
 write-warning "Please copy below cyan link into a browser window and sign in using your Global Administrator:"
 write-host -ForegroundColor Cyan @"
