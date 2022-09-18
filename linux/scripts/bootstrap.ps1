@@ -73,8 +73,7 @@ Id = "62a82d76-70ea-41e2-9197-370581804d09";
 Type = "Role"},
 @{
 Id = "e1fe6dd8-ba31-4d61-89e7-88639da4683d";
-Type = "Scope"}
-},
+Type = "Scope"},
 @{
 Id = "4e46008b-f24c-477d-8fff-7bb4ec7aafe0";
 Type = "Scope"}
