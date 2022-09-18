@@ -247,8 +247,8 @@ echo " "
 sudo docker ps
 
 echo " "
-echo "Waiting for 120 seconds..."
-sleep 120
+echo "Waiting for 180 seconds..."
+sleep 180
 echo " "
 echo " "
 echo "Done! Access your FFPP instance to finalise setup at: https://"$ENV_FFPP_DOMAIN
