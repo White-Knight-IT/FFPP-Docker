@@ -251,4 +251,4 @@ echo "Waiting for 120 seconds..."
 sleep 120
 echo " "
 echo " "
-echo "Done! Please wait 60 seconds and access your FFPP instance to finalise setup at: https://"$ENV_FFPP_DOMAIN
+echo "Done! Access your FFPP instance to finalise setup at: https://"$ENV_FFPP_DOMAIN
